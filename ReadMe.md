@@ -1,15 +1,11 @@
-# SportSee project
+# Project instalation
 
-Projet Frontend avec un Backend déjà réalisé
-
-## Instalation
-
-- You have to run Backend and Frontend.
+You have to run Backend and Frontend.
 
 ## Backend
 
-- Follow indications here : Backend > Readme.md
+Follow indications in > Backend > Readme.md
 
 ## Frontend
 
-- Follow indications here : Frontend > Readme.md
+Follow indications in > Frontend > Readme.md
