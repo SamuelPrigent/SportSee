@@ -1,0 +1,33 @@
+.headerContainer {
+  margin: auto;
+  display: flex;
+  width: 100%;
+  height: 12vh;
+  background-color: black;
+  color: white;
+  font-size: 21px;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.headerItems {
+  display: flex;
+  width: 100%;
+  font-weight: 700;
+  justify-content: space-around;
+  /* Versions modifié du header de la maquette */
+  justify-content: right;
+  margin-right: 40px;
+  gap: 80px;
+}
+
+.headerItem {
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.logoTopleft {
+  height: 61px;
+  margin-left: 25px;
+}

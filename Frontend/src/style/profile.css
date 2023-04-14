@@ -1,0 +1,112 @@
+.mainContainer {
+  display: flex;
+  width: 100%;
+  min-height: 120vh;
+  box-sizing: border-box;
+  color: black;
+}
+
+.rightContainer {
+  /* border: 1px solid black; */
+  margin: 0 auto;
+  box-sizing: border-box;
+  max-width: 1250px;
+  width: 100%;
+  height: auto;
+  padding: 65px 90px 70px;
+}
+
+.profileName {
+  color: black;
+  font-size: 46px;
+  font-weight: 500;
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.profileNameColor {
+  color: red;
+}
+
+.profileMessage {
+  display: flex;
+  color: black;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 70px;
+}
+
+.gridContainer {
+  display: grid;
+  column-gap: 30px;
+  min-height: 400px;
+  grid-template-columns: 1FR 250px;
+}
+
+/* Left */
+
+.gridContainerLeft {
+  /* border: 1px solid red; */
+  /* justify-content: space-between; */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.activityGraph {
+  /* min-height: 50%; */
+  width: 100%;
+  border: 1px solid black;
+  box-sizing: border-box;
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  aspect-ratio: 835/320;
+}
+
+.bottomGraphs {
+  /* border: 1px solid green; */
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 30px;
+  box-sizing: border-box;
+}
+
+.bottomGraph {
+  box-sizing: border-box;
+  border: 1px solid black;
+  border-radius: 5px;
+  aspect-ratio: 1/1;
+  width: 100%;
+}
+
+/* Right */
+
+.gridContainerRight {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.gridContainerLeftActivity {
+  width: 100%;
+  border: 2px solid blue;
+  height: 310px;
+}
+
+@media screen and (max-width: 1150px) {
+  .rightContainer {
+    padding: 45px 65px 70px;
+  }
+
+  .bottomGraphs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .bottomGraphs {
+    grid-template-columns: 1fr;
+  }
+}

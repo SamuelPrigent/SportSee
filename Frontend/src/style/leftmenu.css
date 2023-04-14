@@ -1,0 +1,43 @@
+.leftmenuContainer {
+  height: auto;
+  width: 115px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.leftMenuIcons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 230px;
+  cursor: pointer;
+}
+
+.leftMenuIconBox {
+  margin: auto;
+  border-radius: 6px;
+  width: 64px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+}
+
+.leftMenuIcon {
+  height: 30px;
+}
+
+.leftMenuCopyright {
+  display: flex;
+  align-items: center;
+  padding-bottom: 6px;
+  transform: rotate(-90deg);
+  margin-bottom: 100px;
+  color: white;
+  font-size: 12px;
+  white-space: nowrap;
+}

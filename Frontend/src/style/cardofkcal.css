@@ -1,0 +1,66 @@
+.CardText {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 10px;
+  width: 100%;
+}
+
+.CardTextQty {
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+}
+
+.CardTextUnit {
+  font-size: 20px;
+  font-weight: 500;
+  font-size: 12px;
+  color: #74798c;
+  display: flex;
+  font-weight: 500;
+}
+
+.CardOfKcal {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.0212249);
+  background-color: #fbfbfb;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  box-sizing: border-box;
+  aspect-ratio: 258/124;
+}
+
+.IconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+  aspect-ratio: 1/1;
+  border-radius: 6px;
+}
+
+.Icon {
+  height: 20px;
+}
+
+/* Color of Box */
+
+.TotalColor {
+  background: #fbeaea;
+}
+
+.ProtColor {
+  background-color: #e9f4fb;
+}
+
+.CarbColor {
+  background-color: #fbf6e5;
+}
+
+.FatColor {
+  background-color: #fbeaef;
+}
