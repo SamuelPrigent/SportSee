@@ -56,11 +56,12 @@
 
 .activityGraph {
   /* min-height: 50%; */
-  width: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   box-sizing: border-box;
   background-color: #fbfbfb;
   border-radius: 5px;
+  width: 100%;
+  max-width: 800px;
   aspect-ratio: 835/320;
 }
 
@@ -74,9 +75,9 @@
 }
 
 .bottomGraph {
-  box-sizing: border-box;
-  border: 1px solid black;
-  border-radius: 5px;
+  /* box-sizing: border-box; 
+   border: 1px solid black;
+  border-radius: 5px; */
   aspect-ratio: 1/1;
   width: 100%;
 }

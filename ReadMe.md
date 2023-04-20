@@ -9,3 +9,8 @@ Backend > Readme.md
 ## Frontend
 
 Frontend > Readme.md
+
+## Install Router
+
+For the router its `npm install react-router-dom@6`
+(not npm install react-router)

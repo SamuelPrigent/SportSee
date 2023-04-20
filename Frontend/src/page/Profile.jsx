@@ -8,6 +8,11 @@ import kcal from "../assets/burn.svg";
 import meat from "../assets/meat.svg";
 import apple from "../assets/apple.svg";
 import cheeseburger from "../assets/cheeseburger.svg";
+// components
+import Activity from "../components/recharts/Activity.jsx";
+import Average from "../components/recharts/Average.jsx";
+import Radar from "../components/recharts/Radar.jsx";
+import Score from "../components/recharts/Score.jsx";
 
 function Profile() {
   return (
@@ -23,11 +28,19 @@ function Profile() {
         </div>
         <div className="gridContainer">
           <div className="gridContainerLeft">
-            <div className="activityGraph"></div>
+            <div className="activityGraph">
+              <Activity />
+            </div>
             <div className="bottomGraphs">
-              <div className="bottomGraph"></div>
-              <div className="bottomGraph"></div>
-              <div className="bottomGraph"></div>
+              <div className="bottomGraph">
+                <Average />
+              </div>
+              <div className="bottomGraph">
+                <Radar />
+              </div>
+              <div className="bottomGraph">
+                <Score />
+              </div>
             </div>
           </div>
           <div className="gridContainerRight">
@@ -39,7 +52,7 @@ function Profile() {
             />
             <CardOfKcal
               icon={meat}
-              Qty="150g"
+              Qty="155g"
               Unit="Proteines"
               ClassColor="ProtColor"
             />
