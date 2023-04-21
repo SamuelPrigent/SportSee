@@ -2,26 +2,12 @@
 import React from "react";
 // Style
 import "./recharts.css";
+// PropTypes
+import PropTypes from "prop-types";
 
-// PropTypes ??
-// import PropTypes from "prop-types";
 // mock
 // import mockedData from "../mock/mockedData.js";
-// console.log(mockedData.USER_ACTIVITY[0]);
-
-// custom tooltip activity session
-// function CustomTooltip() {
-//   return (
-//     <TooltipContainer>
-//       <TooltipLine background={`${color.neutral800}`}>
-//         {`${payload[0].value} kg`}
-//       </TooltipLine>
-//       <TooltipLine background={`${color.primary500}`}>
-//         {`${payload[1].value} kCal`}
-//       </TooltipLine>
-//     </TooltipContainer>
-//   );
-// }
+// console.log(mockedData);
 
 // activity
 import {
@@ -37,7 +23,6 @@ import {
 
 //
 function Recharts() {
-  // var
   const color = {
     primary500: "#ff0101",
     neutral100: "#fbfbfb",
@@ -48,7 +33,6 @@ function Recharts() {
     neutral900: "#020203",
   };
 
-  // activity;
   const activity = [
     {
       day: "1",
@@ -85,10 +69,29 @@ function Recharts() {
       kilogram: 69,
       calories: 160,
     },
+    {
+      day: "8",
+      kilogram: 69,
+      calories: 210,
+    },
   ];
 
   return (
     <div className="containerCharts">
+      {/* Text on the Top */}
+      <div className="infoTextContainer">
+        <div className="infoTextTitle">Activité quotidienne</div>
+        <div className="infoTextLegend">
+          <div className="infoTextLegendDetail">
+            <div className="ColorCircle1"></div>
+            Poids (kg)
+          </div>
+          <div className="infoTextLegendDetail">
+            <div className="ColorCircle2"></div>
+            Activité physique (Kcal)
+          </div>
+        </div>
+      </div>
       {/* Activity of the week */}
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
@@ -97,7 +100,7 @@ function Recharts() {
           barGap={8}
           barCategoryGap="35%"
           data={activity}
-          margin={{ top: 50, right: 48, bottom: 30, left: 48 }}
+          margin={{ top: 85, right: 48, bottom: 30, left: 48 }}
         >
           <CartesianGrid
             strokeDasharray="2 2"
@@ -127,8 +130,13 @@ function Recharts() {
             domain={[0, "dataMax + 50"]}
             hide={true}
           />
-          <Tooltip />
-          <Legend verticalAlign="top" height={36} />
+          <Tooltip
+            offset={47}
+            content={<ActivityTooltip />}
+            cursor={{
+              fill: "rgba(0, 0, 0, 0.1)",
+            }}
+          />
           <Bar
             yAxisId="kg"
             dataKey="kilogram"
@@ -146,5 +154,26 @@ function Recharts() {
     </div>
   );
 }
-
 export default Recharts;
+
+function ActivityTooltip({ active, payload }) {
+  if (active && payload) {
+    return (
+      <div className="customTooltip">
+        <div className="tooltipLine" background={"#2b2d30"}>
+          {`${payload[0].value} kg`}
+        </div>
+        <div className="tooltipLine" background={"#ff0101"}>
+          {`${payload[1].value} kCal`}
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
+ActivityTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.array,
+};

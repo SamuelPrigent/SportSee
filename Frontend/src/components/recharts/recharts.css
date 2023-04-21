@@ -3,9 +3,74 @@
   width: 100%;
   height: 100%;
   box-sizing: border-box;
+  position: relative;
+  /* border: 1px solid black; */
 }
 
 /* Activity */
+.customTooltip {
+  background-color: #ff0000;
+}
+
+/* hide outline on tooltip */
+[role="dialog"] {
+  outline: none;
+  height: 100% !important;
+}
+
+.tooltipLine {
+  padding: 0.75rem;
+  margin: 0;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 500;
+  /* background: ${(props) => props.background}; */
+}
+
+/* Activity Top Legend */
+.infoTextContainer {
+  position: relative;
+  background: #fbfbfb;
+}
+
+.infoTextTitle {
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.infoTextLegend {
+  display: flex;
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  color: #74798c;
+}
+
+.infoTextLegendDetail {
+  margin: 0 0 0 2rem;
+}
+
+.ColorCircle1 {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0 0.5rem 0 0;
+  border-radius: 50%;
+  background: #2b2d30;
+}
+
+.ColorCircle2 {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin: 0 0.5rem 0 0;
+  border-radius: 50%;
+  background: #ff0101;
+}
 
 /* Average */
 .averageContainer {
@@ -18,6 +83,39 @@
     #e60001 73%,
     #e60001 100%
   );
+}
+
+/* Average Text */
+.averageLabelContainer {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+.averageLabelText {
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  gap: 4px;
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  font-weight: 500;
+  flex-wrap: nowrap;
+  z-index: 1;
+}
+
+/* Average Tooltip */
+.averageTooltip {
+  padding: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: white;
+  color: black;
 }
 
 /* Radar */

@@ -2,26 +2,12 @@
 import React from "react";
 // Style
 import "./recharts.css";
+// PropTypes
+import PropTypes from "prop-types";
 
-// PropTypes ??
-// import PropTypes from "prop-types";
 // mock
 // import mockedData from "../mock/mockedData.js";
-// console.log(mockedData.USER_ACTIVITY[0]);
-
-// custom tooltip activity session
-// function CustomTooltip() {
-//   return (
-//     <TooltipContainer>
-//       <TooltipLine background={`${color.neutral800}`}>
-//         {`${payload[0].value} kg`}
-//       </TooltipLine>
-//       <TooltipLine background={`${color.primary500}`}>
-//         {`${payload[1].value} kCal`}
-//       </TooltipLine>
-//     </TooltipContainer>
-//   );
-// }
+// console.log(mockedData);
 
 // average sessions
 import {
@@ -80,47 +66,75 @@ function Recharts() {
 
   return (
     <div className="containerCharts">
-      <ResponsiveContainer width="100%" height="100%">
-        <LineChart
-          strokeLinecap="round"
-          className="averageContainer"
-          data={sessions}
-          outerRadius="75%"
-          margin={{ top: 0, right: 12, bottom: 24, left: 12 }}
-        >
-          <XAxis
-            dataKey="day"
-            stroke="rgba(255, 255, 255, 0.5)"
-            axisLine={false}
-            dy={10}
-            tickLine={false}
-            tick={{
-              fontSize: 12,
-              fontWeight: 500,
-            }}
-          />
-          <YAxis
-            dataKey="sessionLength"
-            domain={[0, "dataMax + 60"]}
-            hide={true}
-          />
-          <Line
-            dataKey="sessionLength"
-            type="monotone"
-            stroke="rgba(255, 255, 255, 0.6)"
-            strokeWidth={2}
-            dot={false}
-            activeDot={{
-              stroke: "rgba(255,255,255, 0.5)",
-              strokeWidth: 10,
-              r: 5,
-            }}
-          />
-          <Tooltip />
-        </LineChart>
-      </ResponsiveContainer>
+      {/* Text */}
+      <div className="averageLabelContainer">
+        <div className="averageLabelText">
+          <div>Durée moyenne des</div>
+          <div>sessions</div>
+        </div>
+        {/* Recharts */}
+        <ResponsiveContainer width="100%" height="100%">
+          <LineChart
+            strokeLinecap="round"
+            className="averageContainer"
+            data={sessions}
+            outerRadius="75%"
+            margin={{ top: 0, right: 20, bottom: 24, left: 20 }}
+          >
+            <XAxis
+              dataKey="day"
+              stroke="rgba(255, 255, 255, 0.5)"
+              axisLine={false}
+              dy={10}
+              tickLine={false}
+              tick={{
+                fontSize: 12,
+                fontWeight: 500,
+              }}
+            />
+            <YAxis
+              dataKey="sessionLength"
+              domain={[0, "dataMax + 60"]}
+              hide={true}
+            />
+            <Line
+              dataKey="sessionLength"
+              type="monotone"
+              stroke="rgba(255, 255, 255, 0.6)"
+              strokeWidth={2}
+              dot={false}
+              activeDot={{
+                stroke: "rgba(255,255,255, 0.5)",
+                strokeWidth: 10,
+                r: 5,
+              }}
+            />
+            <Tooltip
+              // position={{ x: 0, y: 0 }}
+              offset={5}
+              content={<AverageTooltip />}
+              cursor={{
+                stroke: "rgba(0, 0, 0, 0)",
+                strokeWidth: 32,
+              }}
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
     </div>
   );
 }
 
 export default Recharts;
+
+function AverageTooltip({ active, payload }) {
+  if (active && payload) {
+    return <div className="averageTooltip">{`${payload[0].value} min`}</div>;
+  }
+  return null;
+}
+
+AverageTooltip.propTypes = {
+  active: PropTypes.bool,
+  payload: PropTypes.array,
+};
