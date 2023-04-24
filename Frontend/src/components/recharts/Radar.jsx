@@ -1,24 +1,13 @@
 // react
 import React from "react";
-// PropTypes ??
-// import PropTypes from "prop-types";
+// PorpTypes
+import PropTypes from "prop-types";
+// Better for responsive than Responsive Container
+import AutoSizer from "react-virtualized-auto-sizer";
+
 // mock
 // import mockedData from "../mock/mockedData.js";
-// console.log(mockedData.USER_ACTIVITY[0]);
-
-// custom tooltip activity session
-// function CustomTooltip() {
-//   return (
-//     <TooltipContainer>
-//       <TooltipLine background={`${color.neutral800}`}>
-//         {`${payload[0].value} kg`}
-//       </TooltipLine>
-//       <TooltipLine background={`${color.primary500}`}>
-//         {`${payload[1].value} kCal`}
-//       </TooltipLine>
-//     </TooltipContainer>
-//   );
-// }
+// console.log(mockedData);
 
 // performance radar
 import {
@@ -34,16 +23,7 @@ function Recharts() {
   // var
   const color = {
     primary500: "#ff0101",
-    neutral100: "#fbfbfb",
-    neutral200: "#dedede",
-    neutral400: "#9b9eac",
-    neutral500: "#74798c",
-    neutral800: "#2b2d30",
-    neutral900: "#020203",
   };
-
-  // Performance Radar
-  let performanceArray = [];
 
   const kindArray = [
     "cardio",
@@ -81,6 +61,9 @@ function Recharts() {
     },
   ];
 
+  // Performance Array for Radar
+  let performanceArray = [];
+
   for (let kindName of kindArray) {
     for (let kindObject of performanceData) {
       if (kindObject.kind === kindName) {
@@ -91,37 +74,45 @@ function Recharts() {
       }
     }
   }
-  console.log(performanceArray);
+  // console.log(performanceArray);
 
   return (
     <div className="containerCharts">
-      <ResponsiveContainer width="100%" height="100%">
-        <RadarChart
-          className="radarContainer"
-          data={performanceArray}
-          outerRadius={window.innerWidth > 1340 ? "70%" : "60%"}
-        >
-          <PolarGrid radialLines={false} />
-          <PolarAngleAxis
-            dataKey="activity"
-            stroke="white"
-            dy={4}
-            tickLine={false}
-            tick={{
-              fontSize: 12,
-              fontWeight: 500,
-            }}
-          />
-          <Radar
-            dataKey="value"
-            fill={`${color.primary500}`}
-            fillOpacity={0.7}
-            stroke="transparent"
-          />
-        </RadarChart>
-      </ResponsiveContainer>
+      <AutoSizer>
+        {({ width, height }) => (
+          <RadarChart
+            width={width}
+            height={height}
+            className="radarContainer"
+            data={performanceArray}
+            outerRadius={window.innerWidth > 1340 ? "70%" : "60%"}
+          >
+            <PolarGrid radialLines={false} />
+            <PolarAngleAxis
+              dataKey="activity"
+              stroke="white"
+              dy={4}
+              tickLine={false}
+              tick={{
+                fontSize: 12,
+                fontWeight: 500,
+              }}
+            />
+            <Radar
+              dataKey="value"
+              fill={`${color.primary500}`}
+              fillOpacity={0.7}
+              stroke="transparent"
+            />
+          </RadarChart>
+        )}
+      </AutoSizer>
     </div>
   );
 }
 
 export default Recharts;
+
+// Recharts.propTypes = {
+//   userId: PropTypes.string.isRequired,
+// };

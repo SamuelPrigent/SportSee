@@ -95,10 +95,10 @@
   border: 2px solid blue;
   height: 310px;
 }
-/* 
+
 @media screen and (max-width: 1150px) {
   .rightContainer {
-    padding: 45px 65px 70px;
+    padding: 40px 45px 70px;
   }
 
   .bottomGraphs {
@@ -110,4 +110,4 @@
   .bottomGraphs {
     grid-template-columns: 1fr;
   }
-} */
+}

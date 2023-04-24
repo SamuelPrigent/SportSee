@@ -1,26 +1,16 @@
 // react
 import React from "react";
-// style
-// import "../style/test.css";
-// PropTypes ??
-// import PropTypes from "prop-types";
+// PropTypes
+import PropTypes from "prop-types";
+// Better for responsive than Responsive Container
+import AutoSizer from "react-virtualized-auto-sizer";
+
 // mock
 // import mockedData from "../mock/mockedData.js";
-// console.log(mockedData.USER_ACTIVITY[0]);
+// console.log(mockedData);
 
-// custom tooltip activity session
-// function CustomTooltip() {
-//   return (
-//     <TooltipContainer>
-//       <TooltipLine background={`${color.neutral800}`}>
-//         {`${payload[0].value} kg`}
-//       </TooltipLine>
-//       <TooltipLine background={`${color.primary500}`}>
-//         {`${payload[1].value} kCal`}
-//       </TooltipLine>
-//     </TooltipContainer>
-//   );
-// }
+// style
+// import "../style/test.css";
 
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
@@ -47,26 +37,28 @@ function Score() {
 
   return (
     <div className="containerCharts">
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart className="scoreContainer" width={160} height={160}>
-          <Pie
-            data={pieData}
-            dataKey="value"
-            innerRadius={70}
-            outerRadius={80}
-            startAngle={90}
-            endAngle={450}
-          >
-            {pieData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={entry.fillColor}
-                cornerRadius="50%"
-              />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
+      <AutoSizer>
+        {({ width, height }) => (
+          <PieChart className="scoreContainer" width={width} height={height}>
+            <Pie
+              data={pieData}
+              dataKey="value"
+              innerRadius={70}
+              outerRadius={80}
+              startAngle={90}
+              endAngle={450}
+            >
+              {pieData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={entry.fillColor}
+                  cornerRadius="50%"
+                />
+              ))}
+            </Pie>
+          </PieChart>
+        )}
+      </AutoSizer>
       <div className="scoreText">
         <div className="scoreValue">{`${100 * score}%`}</div>
         de votre

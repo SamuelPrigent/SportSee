@@ -4,6 +4,8 @@ import React from "react";
 import "./recharts.css";
 // PropTypes
 import PropTypes from "prop-types";
+// Better for responsive than Responsive Container
+import AutoSizer from "react-virtualized-auto-sizer";
 
 // mock
 // import mockedData from "../mock/mockedData.js";
@@ -22,15 +24,15 @@ import {
 //
 function Recharts() {
   // var
-  const color = {
-    primary500: "#ff0101",
-    neutral100: "#fbfbfb",
-    neutral200: "#dedede",
-    neutral400: "#9b9eac",
-    neutral500: "#74798c",
-    neutral800: "#2b2d30",
-    neutral900: "#020203",
-  };
+  // const color = {
+  //   primary500: "#ff0101",
+  //   neutral100: "#fbfbfb",
+  //   neutral200: "#dedede",
+  //   neutral400: "#9b9eac",
+  //   neutral500: "#74798c",
+  //   neutral800: "#2b2d30",
+  //   neutral900: "#020203",
+  // };
 
   //   average sessions
   const sessions = [
@@ -73,53 +75,57 @@ function Recharts() {
           <div>sessions</div>
         </div>
         {/* Recharts */}
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart
-            strokeLinecap="round"
-            className="averageContainer"
-            data={sessions}
-            outerRadius="75%"
-            margin={{ top: 0, right: 20, bottom: 24, left: 20 }}
-          >
-            <XAxis
-              dataKey="day"
-              stroke="rgba(255, 255, 255, 0.5)"
-              axisLine={false}
-              dy={10}
-              tickLine={false}
-              tick={{
-                fontSize: 12,
-                fontWeight: 500,
-              }}
-            />
-            <YAxis
-              dataKey="sessionLength"
-              domain={[0, "dataMax + 60"]}
-              hide={true}
-            />
-            <Line
-              dataKey="sessionLength"
-              type="monotone"
-              stroke="rgba(255, 255, 255, 0.6)"
-              strokeWidth={2}
-              dot={false}
-              activeDot={{
-                stroke: "rgba(255,255,255, 0.5)",
-                strokeWidth: 10,
-                r: 5,
-              }}
-            />
-            <Tooltip
-              // position={{ x: 0, y: 0 }}
-              offset={5}
-              content={<AverageTooltip />}
-              cursor={{
-                stroke: "rgba(0, 0, 0, 0)",
-                strokeWidth: 32,
-              }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+        <AutoSizer>
+          {({ width, height }) => (
+            <LineChart
+              width={width}
+              height={height}
+              strokeLinecap="round"
+              className="averageContainer"
+              data={sessions}
+              outerRadius="75%"
+              margin={{ top: 0, right: 20, bottom: 24, left: 20 }}
+            >
+              <XAxis
+                dataKey="day"
+                stroke="rgba(255, 255, 255, 0.5)"
+                axisLine={false}
+                dy={10}
+                tickLine={false}
+                tick={{
+                  fontSize: 12,
+                  fontWeight: 500,
+                }}
+              />
+              <YAxis
+                dataKey="sessionLength"
+                domain={[0, "dataMax + 60"]}
+                hide={true}
+              />
+              <Line
+                dataKey="sessionLength"
+                type="monotone"
+                stroke="rgba(255, 255, 255, 0.6)"
+                strokeWidth={2}
+                dot={false}
+                activeDot={{
+                  stroke: "rgba(255,255,255, 0.5)",
+                  strokeWidth: 10,
+                  r: 5,
+                }}
+              />
+              <Tooltip
+                // position={{ x: 0, y: 0 }}
+                offset={5}
+                content={<AverageTooltip />}
+                cursor={{
+                  stroke: "rgba(0, 0, 0, 0)",
+                  strokeWidth: 32,
+                }}
+              />
+            </LineChart>
+          )}
+        </AutoSizer>
       </div>
     </div>
   );
