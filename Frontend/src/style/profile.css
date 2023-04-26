@@ -55,14 +55,13 @@
 }
 
 .activityGraph {
-  /* min-height: 50%; */
-  /* border: 1px solid black; */
+  /* aspect-ratio: 835/320; */
   box-sizing: border-box;
   background-color: #fbfbfb;
   border-radius: 5px;
   width: 100%;
   max-width: 800px;
-  aspect-ratio: 835/320;
+  min-height: 300px;
 }
 
 .bottomGraphs {

@@ -10,13 +10,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 // console.log(mockedData);
 
 // performance radar
-import {
-  PolarAngleAxis,
-  PolarGrid,
-  Radar,
-  RadarChart,
-  ResponsiveContainer,
-} from "recharts";
+import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 
 //
 function Recharts() {

@@ -24,7 +24,6 @@
   color: white;
   font-size: 0.7rem;
   font-weight: 500;
-  /* background: ${(props) => props.background}; */
 }
 
 /* Activity Top Legend */
@@ -76,13 +75,13 @@
 .averageContainer {
   background-color: #ff0000;
   border-radius: 5px;
-  background: linear-gradient(
+  /* background: linear-gradient(
     to right,
     #ff0000 0%,
     #ff0000 73%,
     #e60001 73%,
     #e60001 100%
-  );
+  ); */
 }
 
 /* Average Text */
@@ -116,6 +115,8 @@
   font-weight: 500;
   background: white;
   color: black;
+  border-radius: 2px;
+  margin: auto;
 }
 
 /* Radar */
@@ -138,7 +139,7 @@
   bottom: 67%;
   font-weight: 500;
   color: #74798c;
-  top: 30%;
+  top: 33%;
 }
 
 .scoreValue {
@@ -147,4 +148,14 @@
   text-align: center;
   color: #282d30;
   margin-bottom: 7px;
+}
+
+.scoreTitle {
+  position: absolute;
+  top: 1.5rem;
+  left: 2rem;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  z-index: 1;
 }

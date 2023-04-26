@@ -9,34 +9,31 @@ import AutoSizer from "react-virtualized-auto-sizer";
 // import mockedData from "../mock/mockedData.js";
 // console.log(mockedData);
 
-// style
-// import "../style/test.css";
-
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { Cell, Pie, PieChart } from "recharts";
 
 //
 function Score() {
-  // var
+  // color
   const color = {
     primary500: "#ff0101",
-    neutral100: "#fbfbfb",
-    neutral200: "#dedede",
-    neutral400: "#9b9eac",
-    neutral500: "#74798c",
-    neutral800: "#2b2d30",
-    neutral900: "#020203",
   };
 
-  //   Score
+  // Score
   const score = 0.3;
 
+  //
   const pieData = [
-    { name: "completed", value: score, fillColor: `${color.primary500}` },
-    { name: "not-completed", value: 1 - score, fillColor: "transparent" },
+    {
+      name: "completed",
+      value: score,
+      fillColor: `${color.primary500}`,
+    },
+    // { name: "not-completed", value: 1 - score, fillColor: "transparent" },
   ];
 
   return (
     <div className="containerCharts">
+      <div className="scoreTitle">Score</div>
       <AutoSizer>
         {({ width, height }) => (
           <PieChart className="scoreContainer" width={width} height={height}>
@@ -46,7 +43,7 @@ function Score() {
               innerRadius={70}
               outerRadius={80}
               startAngle={90}
-              endAngle={450}
+              endAngle={180}
             >
               {pieData.map((entry, index) => (
                 <Cell
@@ -56,6 +53,15 @@ function Score() {
                 />
               ))}
             </Pie>
+            <Pie
+              data={pieData}
+              dataKey="value"
+              innerRadius={0}
+              outerRadius={70}
+              startAngle={0}
+              endAngle={360}
+              fill="white"
+            ></Pie>
           </PieChart>
         )}
       </AutoSizer>
