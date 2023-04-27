@@ -159,3 +159,10 @@
   font-weight: 500;
   z-index: 1;
 }
+
+@media screen and (max-width: 1300px) {
+  .scoreTitle {
+    top: 1rem;
+    left: 1rem;
+  }
+}

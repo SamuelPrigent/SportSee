@@ -95,7 +95,7 @@
   height: 310px;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1250px) {
   .rightContainer {
     padding: 40px 45px 70px;
   }

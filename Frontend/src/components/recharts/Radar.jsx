@@ -56,7 +56,7 @@ function Recharts() {
   ];
 
   // Performance Array for Radar
-  let performanceArray = [];
+  const performanceArray = [];
 
   for (let kindName of kindArray) {
     for (let kindObject of performanceData) {
@@ -68,7 +68,65 @@ function Recharts() {
       }
     }
   }
-  // console.log(performanceArray);
+  console.log(performanceArray);
+
+  const performanceArrayReOrder = [];
+
+  // 1 - Find Intensity
+  for (let object of performanceArray) {
+    if (object.kind === "intensity") {
+      performanceArrayReOrder.push({
+        kind: "Intensité",
+        value: object.value,
+      });
+    }
+  }
+  // 2 - Find Speed
+  for (let object of performanceArray) {
+    if (object.kind === "speed") {
+      performanceArrayReOrder.push({
+        kind: "Vitesse",
+        value: object.value,
+      });
+    }
+  }
+  // 3 - Find Strength
+  for (let object of performanceArray) {
+    if (object.kind === "strength") {
+      performanceArrayReOrder.push({
+        kind: "Force",
+        value: object.value,
+      });
+    }
+  }
+  // 4 - Find Endurance
+  for (let object of performanceArray) {
+    if (object.kind === "endurance") {
+      performanceArrayReOrder.push({
+        kind: "Endurance",
+        value: object.value,
+      });
+    }
+  }
+  // 5 - Find Energy
+  for (let object of performanceArray) {
+    if (object.kind === "energy") {
+      performanceArrayReOrder.push({
+        kind: "Energie",
+        value: object.value,
+      });
+    }
+  }
+  // 6 - Find Cardio
+  for (let object of performanceArray) {
+    if (object.kind === "cardio") {
+      performanceArrayReOrder.push({
+        kind: "Cardio",
+        value: object.value,
+      });
+    }
+  }
+  console.log(performanceArrayReOrder);
 
   return (
     <div className="containerCharts">
@@ -78,12 +136,13 @@ function Recharts() {
             width={width}
             height={height}
             className="radarContainer"
-            data={performanceArray}
-            outerRadius={window.innerWidth > 1340 ? "70%" : "60%"}
+            data={performanceArrayReOrder}
+            // outerRadius={"65%"}
+            outerRadius={window.innerWidth > 1300 ? "65%" : "60%"}
           >
-            <PolarGrid radialLines={false} />
+            <PolarGrid radialLines={false} gridType="polygon" />
             <PolarAngleAxis
-              dataKey="activity"
+              dataKey="kind"
               stroke="white"
               dy={4}
               tickLine={false}

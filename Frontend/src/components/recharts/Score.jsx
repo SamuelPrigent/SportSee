@@ -36,7 +36,12 @@ function Score() {
       <div className="scoreTitle">Score</div>
       <AutoSizer>
         {({ width, height }) => (
-          <PieChart className="scoreContainer" width={width} height={height}>
+          <PieChart
+            outerRadius={"65%"}
+            className="scoreContainer"
+            width={width}
+            height={height}
+          >
             <Pie
               data={pieData}
               dataKey="value"
