@@ -143,7 +143,7 @@ function Recharts() {
               <Tooltip
                 content={<AverageTooltip />}
                 cursor={false}
-                // position={{ y: 61 }}
+                position={{ y: 61 }}
               />
             </LineChart>
           )}

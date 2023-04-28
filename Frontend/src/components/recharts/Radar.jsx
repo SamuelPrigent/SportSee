@@ -68,7 +68,7 @@ function Recharts() {
       }
     }
   }
-  console.log(performanceArray);
+  // console.log(performanceArray);
 
   const performanceArrayReOrder = [];
 
@@ -126,7 +126,7 @@ function Recharts() {
       });
     }
   }
-  console.log(performanceArrayReOrder);
+  // console.log(performanceArrayReOrder);
 
   return (
     <div className="containerCharts">
