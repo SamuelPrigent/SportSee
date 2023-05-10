@@ -30,6 +30,14 @@ function Profile() {
     userId = 12;
   }
 
+  // short-cut 1 & 2
+  if (useParams().id == 1) {
+    userId = 12;
+  }
+  if (useParams().id == 2) {
+    userId = 18;
+  }
+
   // refresh html data
   // if (userId == 12 || userId == 18) {
   //   const { data } = useSportSeeApi(userId, "firstName");
@@ -40,7 +48,7 @@ function Profile() {
   //   }, [data]);
   // }
 
-  // navigate
+  // navigate;
   const navigate = useNavigate();
   if (userId != 12 && userId != 18) {
     useEffect(() => {
