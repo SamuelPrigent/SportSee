@@ -11,8 +11,8 @@ function CardOfKcal({ type, userId, icon, ClassColor }) {
   let showUnit = "";
   //
   if (type === "kcal") {
-    // showQty = `${data.calorieCount}kcal`;
-    // un calcul serait plus exact ?
+    // showQty = `${data.calorieCount}kcal`; // les kcal ne semble pas correspondre au reste
+    // un calcul serait donc plus fiable plutôt que les chiffres de l'api
     showQty = `${
       (data.proteinCount + data.carbohydrateCount) * 4 + data.lipidCount * 9
     }kcal`;

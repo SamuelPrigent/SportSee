@@ -5,7 +5,7 @@ const BASE_URL = "http://localhost:3000";
 //
 export function useSportSeeApi(userId, type) {
   const [data, setData] = useState({});
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
   //
   const endpoint = getEndpoint(userId, type);
@@ -22,7 +22,7 @@ export function useSportSeeApi(userId, type) {
         setData(extractedData);
       } catch (err) {
         console.error(`Error on ${endpoint} : ${err}`);
-        setError(true);
+        // setError(true);
       } finally {
         // setIsLoading(false);
       }
@@ -31,7 +31,7 @@ export function useSportSeeApi(userId, type) {
     fetchData();
   }, []);
 
-  return { data, error };
+  return { data };
 }
 
 // ==== Endpoint ====
@@ -83,11 +83,11 @@ function extractData(data, type) {
         return getKeyData(data);
 
       default:
-        console.error("extractDataByService error.");
+        console.error("Error while extracting data.");
         return;
     }
   } else {
-    console.error("extractDataByService error.");
+    console.error("Error while extracting data.");
     return;
   }
 }
@@ -125,10 +125,10 @@ function getAverageSessions(userData) {
 function getTodayScore(userData) {
   // console.log(userData);
   if (userData.data.score) {
-    return userData === "can not get user" ? 0 : userData.data.score;
+    return userData.data.score;
   }
   if (userData.data.todayScore) {
-    return userData === "can not get user" ? 0 : userData.data.todayScore;
+    return userData.data.todayScore;
   }
   // or default
 }
@@ -142,7 +142,7 @@ function getDailyActivity(userData) {
     for (let item of userData) {
       // eslint-disable-next-line no-unused-vars
       const [yyyy, mm, dd] = item.day.split("-");
-
+      // push item data
       dailyActivity.push({
         day: `${dd}/${mm}`,
         kilogram: item.kilogram,
@@ -156,14 +156,10 @@ function getDailyActivity(userData) {
 
 // ===== Name Surname =====
 function getFirstName(userData) {
-  return userData === "can not get user"
-    ? "unknown user"
-    : userData.data.userInfos.firstName;
+  return userData.data.userInfos.firstName;
 }
 
 // ===== Key Data =====
 function getKeyData(userData) {
-  return userData === "can not get user"
-    ? getDefaultKeyData()
-    : userData.data.keyData;
+  return userData.data.keyData;
 }
