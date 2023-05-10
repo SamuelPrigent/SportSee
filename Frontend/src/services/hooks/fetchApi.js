@@ -116,7 +116,6 @@ function getActivities(userData) {
 // ===== Average =====
 function getAverageSessions(userData) {
   if (userData) {
-    // const averageSessions = userData;
     return userData;
   }
   // or default
@@ -172,6 +171,10 @@ function getKeyData(userData) {
     : userData.data.keyData;
 }
 
+//
+//
+//
+//
 /// ====== DEFAULT VALUE ====== ///
 
 // export function getDefaultActivities() {

@@ -18,6 +18,9 @@ import { useParams } from "react-router-dom"; // get id
 // for redirection
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+//
+// use API for refresh title
+// import { useSportSeeApi } from "../services/hooks/fetchApi.js";
 
 //
 function Profile() {
@@ -27,12 +30,22 @@ function Profile() {
     userId = 12;
   }
 
-  // if wrong userId => redirection
+  // refresh html data
+  // if (userId == 12 || userId == 18) {
+  //   const { data } = useSportSeeApi(userId, "firstName");
+  //   useEffect(() => {
+  // document.title = `Bonjour ${data} !`;
+  // const favicon = document.querySelector('link[rel="icon"]');
+  // favicon.href = "../assets/logoIcon.svg";
+  //   }, [data]);
+  // }
+
+  // navigate
+  const navigate = useNavigate();
   if (userId != 12 && userId != 18) {
-    const navigate = useNavigate();
     useEffect(() => {
       navigate("/error");
-    }, []);
+    }, [userId, navigate]);
   } else
     return (
       <div className="mainContainer">

@@ -3,7 +3,7 @@ import "../style/cardofkcal.css";
 // API
 import { useSportSeeApi } from "../services/hooks/fetchApi.js";
 
-function CardOfKcal({ icon, ClassColor, type, userId }) {
+function CardOfKcal({ type, userId, icon, ClassColor }) {
   // get data
   const { data } = useSportSeeApi(userId, "key-data");
   //
