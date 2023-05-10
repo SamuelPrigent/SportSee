@@ -1,63 +1,54 @@
 // react
 import React from "react";
 // Style
-import "./recharts.css";
-// PropTypes
-import PropTypes from "prop-types";
+import "../../style/recharts.css";
 // Better for responsive than Responsive Container
 import AutoSizer from "react-virtualized-auto-sizer";
-
-// mock
-// import mockedData from "../mock/mockedData.js";
-// console.log(mockedData);
-
-// average sessions
+// recharts
 import { Line, LineChart, Tooltip, XAxis, YAxis, Legend } from "recharts";
+// API
+import { useSportSeeApi } from "../../services/hooks/fetchApi.js";
+// Prop Types
+import PropTypes from "prop-types";
+
+// ??
+// import mockedData from "../mock/mockedData.js"; // mock
 
 //
-function Recharts() {
-  // var
-  // const color = {
-  //   primary500: "#ff0101",
-  //   neutral100: "#fbfbfb",
-  //   neutral200: "#dedede",
-  //   neutral400: "#9b9eac",
-  //   neutral500: "#74798c",
-  //   neutral800: "#2b2d30",
-  //   neutral900: "#020203",
-  // };
+function Recharts({ userId }) {
+  const { data } = useSportSeeApi(userId, "average-sessions");
 
   //   average sessions
-  const sessions = [
-    {
-      day: "1",
-      sessionLength: 30,
-    },
-    {
-      day: "2",
-      sessionLength: 23,
-    },
-    {
-      day: "3",
-      sessionLength: 45,
-    },
-    {
-      day: "4",
-      sessionLength: 50,
-    },
-    {
-      day: "5",
-      sessionLength: 0,
-    },
-    {
-      day: "6",
-      sessionLength: 0,
-    },
-    {
-      day: "7",
-      sessionLength: 60,
-    },
-  ];
+  // const sessions = [
+  //   {
+  //     day: "1",
+  //     sessionLength: 30,
+  //   },
+  //   {
+  //     day: "2",
+  //     sessionLength: 23,
+  //   },
+  //   {
+  //     day: "3",
+  //     sessionLength: 45,
+  //   },
+  //   {
+  //     day: "4",
+  //     sessionLength: 50,
+  //   },
+  //   {
+  //     day: "5",
+  //     sessionLength: 0,
+  //   },
+  //   {
+  //     day: "6",
+  //     sessionLength: 0,
+  //   },
+  //   {
+  //     day: "7",
+  //     sessionLength: 60,
+  //   },
+  // ];
 
   return (
     <div className="containerCharts">
@@ -75,7 +66,7 @@ function Recharts() {
               height={height}
               strokeLinecap="round"
               className="averageContainer"
-              data={sessions}
+              data={data}
               outerRadius="75%"
               margin={{ top: 0, right: 20, bottom: 24, left: 20 }}
               // Gradient with mouse

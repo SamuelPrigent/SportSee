@@ -1,34 +1,31 @@
 // react
 import React from "react";
-// PropTypes
-import PropTypes from "prop-types";
 // Better for responsive than Responsive Container
 import AutoSizer from "react-virtualized-auto-sizer";
-
-// mock
-// import mockedData from "../mock/mockedData.js";
-// console.log(mockedData);
-
+// recharts
 import { Cell, Pie, PieChart } from "recharts";
+// API
+import { useSportSeeApi } from "../../services/hooks/fetchApi.js";
+// Prop Types
+// import PropTypes from "prop-types";
+
+// ??
+// import mockedData from "../mock/mockedData.js"; // mock
 
 //
-function Score() {
-  // color
-  const color = {
-    primary500: "#ff0101",
-  };
+function Score({ userId }) {
+  const { data } = useSportSeeApi(userId, "today-score");
+  // const { data, isLoading, error } = useSportSeeApi(userId, "today-score");
 
-  // Score
-  const score = 0.3;
+  let score = data;
 
-  //
+  // if (error || isLoading) {
+  //   score = 0;
+  // }
+
   const pieData = [
-    {
-      name: "completed",
-      value: score,
-      fillColor: `${color.primary500}`,
-    },
-    // { name: "not-completed", value: 1 - score, fillColor: "transparent" },
+    { name: "completed", value: score, fillColor: "#ff0101" },
+    { name: "not-completed", value: 1 - score, fillColor: "transparent" },
   ];
 
   return (
@@ -42,14 +39,16 @@ function Score() {
             width={width}
             height={height}
           >
+            {/* Circle Bars Zone */}
             <Pie
               data={pieData}
               dataKey="value"
               innerRadius={70}
               outerRadius={80}
               startAngle={90}
-              endAngle={180}
+              endAngle={450}
             >
+              {/* Bars Portion */}
               {pieData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
@@ -58,6 +57,7 @@ function Score() {
                 />
               ))}
             </Pie>
+            {/* White circle */}
             <Pie
               data={pieData}
               dataKey="value"

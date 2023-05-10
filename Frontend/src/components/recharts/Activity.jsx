@@ -1,17 +1,10 @@
 // react
 import React from "react";
 // Style
-import "./recharts.css";
-// PropTypes
-import PropTypes from "prop-types";
+import "../../style/recharts.css";
 // Better for responsive than Responsive Container
 import AutoSizer from "react-virtualized-auto-sizer";
-
-// mock
-// import mockedData from "../mock/mockedData.js";
-// console.log(mockedData);
-
-// activity
+// recharts
 import {
   BarChart,
   Bar,
@@ -21,61 +14,62 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+// API
+import { useSportSeeApi } from "../../services/hooks/fetchApi.js";
+// PropTypes
+import PropTypes from "prop-types";
+
+// ??
+// import mockedData from "../mock/mockedData.js"; // mock
 
 //
-function Recharts() {
-  const color = {
-    primary500: "#ff0101",
-    neutral100: "#fbfbfb",
-    neutral200: "#dedede",
-    neutral400: "#9b9eac",
-    neutral500: "#74798c",
-    neutral800: "#2b2d30",
-    neutral900: "#020203",
-  };
+function Recharts({ userId }) {
+  const { data } = useSportSeeApi(userId, "activity");
+  // console.log(data);
 
-  const activity = [
-    {
-      day: "1",
-      kilogram: 71,
-      calories: 240,
-    },
-    {
-      day: "2",
-      kilogram: 72,
-      calories: 270,
-    },
-    {
-      day: "3",
-      kilogram: 71,
-      calories: 260,
-    },
-    {
-      day: "4",
-      kilogram: 72,
-      calories: 390,
-    },
-    {
-      day: "5",
-      kilogram: 71,
-      calories: 160,
-    },
-    {
-      day: "6",
-      kilogram: 70,
-      calories: 162,
-    },
-    {
-      day: "7",
-      kilogram: 69,
-      calories: 160,
-    },
-    {
-      day: "8",
-      kilogram: 69,
-      calories: 210,
-    },
-  ];
+  // mock
+  // const activity = [
+  //   {
+  //     day: "1",
+  //     kilogram: 71,
+  //     calories: 240,
+  //   },
+  //   {
+  //     day: "2",
+  //     kilogram: 72,
+  //     calories: 270,
+  //   },
+  //   {
+  //     day: "3",
+  //     kilogram: 71,
+  //     calories: 260,
+  //   },
+  //   {
+  //     day: "4",
+  //     kilogram: 72,
+  //     calories: 390,
+  //   },
+  //   {
+  //     day: "5",
+  //     kilogram: 71,
+  //     calories: 160,
+  //   },
+  //   {
+  //     day: "6",
+  //     kilogram: 70,
+  //     calories: 162,
+  //   },
+  //   {
+  //     day: "7",
+  //     kilogram: 69,
+  //     calories: 160,
+  //   },
+  //   {
+  //     day: "8",
+  //     kilogram: 69,
+  //     calories: 210,
+  //   },
+  // ];
 
   return (
     <div className="containerCharts">
@@ -99,17 +93,15 @@ function Recharts() {
           <BarChart
             width={width}
             height={height}
-            // width={500}
-            // height={300}
             barGap={8}
             barCategoryGap="35%"
-            data={activity}
+            data={data}
             margin={{ top: 85, right: 48, bottom: 30, left: 48 }}
           >
             <CartesianGrid
               strokeDasharray="2 2"
               vertical={false}
-              stroke={`${color.neutral200}`}
+              stroke={"#dedede"}
             />
             <XAxis
               dataKey="day"
@@ -117,7 +109,7 @@ function Recharts() {
               tick={{ fontSize: 14, fontWeight: 500 }}
               padding={{ left: -36, right: -36 }}
               tickLine={false}
-              stroke={`${color.neutral400}`}
+              stroke={"#9b9eac"}
             />
             <YAxis
               orientation="right"

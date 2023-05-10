@@ -3,6 +3,7 @@ import "../style/profile.css";
 // component
 import LeftMenu from "../components/LeftMenu.jsx";
 import CardOfKcal from "../components/CardOfKcal.jsx";
+import ProfileName from "../components/ProfileName.jsx";
 // assets
 import kcal from "../assets/burn.svg";
 import meat from "../assets/meat.svg";
@@ -11,68 +12,94 @@ import cheeseburger from "../assets/cheeseburger.svg";
 // components
 import Activity from "../components/recharts/Activity.jsx";
 import Average from "../components/recharts/Average.jsx";
-import Radar from "../components/recharts/Radar.jsx";
+import Performance from "../components/recharts/Performance.jsx";
 import Score from "../components/recharts/Score.jsx";
+import { useParams } from "react-router-dom"; // get id
+// for redirection
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
+//
 function Profile() {
-  return (
-    <div className="mainContainer">
-      <LeftMenu />
-      <div className="rightContainer">
-        <div className="profileName">
-          <div>Bonjour</div>
-          <div className="profileNameColor">Thomas</div>
-        </div>
-        <div className="profileMessage">
-          Félicitation ! Vous avez explosé vos objectifs hier 👏
-        </div>
-        <div className="gridContainer">
-          <div className="gridContainerLeft">
-            <div className="activityGraph">
-              <Activity />
-            </div>
-            <div className="bottomGraphs">
-              <div className="bottomGraph">
-                <Average />
-              </div>
-              <div className="bottomGraph">
-                <Radar />
-              </div>
-              <div className="bottomGraph">
-                <Score />
-              </div>
-            </div>
+  let userId = useParams().id;
+  // if undefined use user/12
+  if (!userId) {
+    userId = 12;
+  }
+
+  // if wrong userId => redirection
+  if (userId != 12 && userId != 18) {
+    const navigate = useNavigate();
+    useEffect(() => {
+      navigate("/error");
+    }, []);
+  } else
+    return (
+      <div className="mainContainer">
+        <LeftMenu />
+        <div className="rightContainer">
+          <div className="profileName">
+            <div>Bonjour</div>
+            <ProfileName userId={userId} />
           </div>
-          <div className="gridContainerRight">
-            <CardOfKcal
-              icon={kcal}
-              Qty="1,930kcal"
-              Unit="Kcal"
-              ClassColor="TotalColor"
-            />
-            <CardOfKcal
-              icon={meat}
-              Qty="155g"
-              Unit="Proteines"
-              ClassColor="ProtColor"
-            />
-            <CardOfKcal
-              icon={apple}
-              Qty="290g"
-              Unit="Glucides"
-              ClassColor="CarbColor"
-            />
-            <CardOfKcal
-              icon={cheeseburger}
-              Qty="50g"
-              Unit="Lipides"
-              ClassColor="FatColor"
-            />
+          <div className="profileMessage">
+            Félicitation ! Vous avez explosé vos objectifs hier 👏
+          </div>
+          <div className="gridContainer">
+            <div className="gridContainerLeft">
+              <div className="activityGraph">
+                <Activity userId={userId} />
+              </div>
+              <div className="bottomGraphs">
+                <div className="bottomGraph">
+                  <Average userId={userId} />
+                </div>
+                <div className="bottomGraph">
+                  <Performance userId={userId} />
+                </div>
+                <div className="bottomGraph">
+                  <Score userId={userId} />
+                </div>
+              </div>
+            </div>
+            <div className="gridContainerRight">
+              <CardOfKcal
+                // data
+                userId={userId}
+                type="kcal"
+                // color
+                icon={kcal}
+                ClassColor="TotalColor"
+              />
+              <CardOfKcal
+                // data
+                userId={userId}
+                type="prot"
+                // color
+                icon={meat}
+                ClassColor="ProtColor"
+              />
+              <CardOfKcal
+                // data
+                userId={userId}
+                type={"carb"}
+                // color
+                icon={apple}
+                ClassColor="CarbColor"
+              />
+              <CardOfKcal
+                // data
+                userId={userId}
+                type={"lipid"}
+                // color
+                icon={cheeseburger}
+                ClassColor="FatColor"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }
 
 export default Profile;
