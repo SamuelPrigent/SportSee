@@ -110,7 +110,7 @@ function getActivities(userData) {
     return performanceArrayReOrder;
   }
   return;
-  // return getDefaultActivities();
+  // or default
 }
 
 // ===== Average =====
@@ -119,7 +119,6 @@ function getAverageSessions(userData) {
     return userData;
   }
   // or default
-  // return getDefaultAverage();
 }
 
 // ===== Score =====
@@ -132,7 +131,6 @@ function getTodayScore(userData) {
     return userData === "can not get user" ? 0 : userData.data.todayScore;
   }
   // or default
-  // return;
 }
 
 // ===== Activity =====
@@ -154,7 +152,6 @@ function getDailyActivity(userData) {
     return dailyActivity;
   }
   // or default
-  // return getDefaultDailyActivity();
 }
 
 // ===== Name Surname =====
@@ -170,92 +167,3 @@ function getKeyData(userData) {
     ? getDefaultKeyData()
     : userData.data.keyData;
 }
-
-//
-//
-//
-//
-/// ====== DEFAULT VALUE ====== ///
-
-// export function getDefaultActivities() {
-//   const activities = [];
-
-//   for (let key in ACTIVITY_BY_KIND) {
-//     activities.push({
-//       activity: ACTIVITY_BY_KIND[key],
-//       value: 0,
-//     });
-//   }
-
-//   return activities;
-// }
-
-// //
-// export function getDefaultAverageSessions() {
-//   const averageSessions = [
-//     {
-//       day: "L",
-//       sessionLength: 0,
-//     },
-//     {
-//       day: "M",
-//       sessionLength: 0,
-//     },
-//     {
-//       day: "M",
-//       sessionLength: 0,
-//     },
-//     {
-//       day: "J",
-//       sessionLength: 0,
-//     },
-//     {
-//       day: "V",
-//       sessionLength: 0,
-//     },
-//     {
-//       day: "S",
-//       sessionLength: 0,
-//     },
-//     {
-//       day: "D",
-//       sessionLength: 0,
-//     },
-//   ];
-
-//   return averageSessions;
-// }
-
-// //
-// export function getDefaultDailyActivity() {
-//   const dailyActivity = [];
-
-//   let date = new Date(Date.now());
-
-//   // eslint-disable-next-line no-unused-vars
-//   for (let _ of "1234567") {
-//     let dateFr = new Intl.DateTimeFormat("fr").format(date);
-
-//     dailyActivity.push({
-//       day: dateFr.slice(0, 5),
-//       kilogram: 0,
-//       calories: 0,
-//     });
-
-//     date.setDate(date.getDate() - 1);
-//   }
-
-//   dailyActivity.reverse();
-
-//   return dailyActivity;
-// }
-
-// //
-// export function getDefaultKeyData() {
-//   return {
-//     calorieCount: 0,
-//     proteinCount: 0,
-//     carbohydrateCount: 0,
-//     lipidCount: 0,
-//   };
-// }
