@@ -30,23 +30,13 @@ function Profile() {
     userId = 12;
   }
 
-  // short-cut 1 & 2
+  // Short-cut for userId
   if (useParams().id == 1) {
     userId = 12;
   }
   if (useParams().id == 2) {
     userId = 18;
   }
-
-  // refresh html data
-  // if (userId == 12 || userId == 18) {
-  //   const { data } = useSportSeeApi(userId, "firstName");
-  //   useEffect(() => {
-  // document.title = `Bonjour ${data} !`;
-  // const favicon = document.querySelector('link[rel="icon"]');
-  // favicon.href = "../assets/logoIcon.svg";
-  //   }, [data]);
-  // }
 
   // navigate;
   const navigate = useNavigate();

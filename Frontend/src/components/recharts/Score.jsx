@@ -15,7 +15,6 @@ import { useSportSeeApi } from "../../services/hooks/fetchApi.js";
 //
 function Score({ userId }) {
   const { data } = useSportSeeApi(userId, "today-score");
-  // const { data, isLoading, error } = useSportSeeApi(userId, "today-score");
 
   let score = data;
 

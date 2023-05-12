@@ -2,14 +2,17 @@ import { useEffect, useState } from "react";
 
 const BASE_URL = "http://localhost:3000";
 
-//
+/**
+ * Hook to get data from API in react components
+ * @param { number } userId - the user about we need information
+ * @param { string } type - type of data we want
+ * @returns { undefined | Object } - array of data
+ */
 export function useSportSeeApi(userId, type) {
-  const [data, setData] = useState({});
   // const [error, setError] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
-  //
+  const [data, setData] = useState({});
   const endpoint = getEndpoint(userId, type);
-
   useEffect(() => {
     if (!endpoint) return;
     // setIsLoading(true);
@@ -34,7 +37,12 @@ export function useSportSeeApi(userId, type) {
   return { data };
 }
 
-// ==== Endpoint ====
+/**
+ * Endpoint
+ * @param { number } userId
+ * @param { string } type
+ * @returns { string } endpoint used to fetch API
+ */
 function getEndpoint(userId, type) {
   switch (type) {
     case "activity":
@@ -60,7 +68,12 @@ function getEndpoint(userId, type) {
   }
 }
 
-// ==== Extract Data ====
+/**
+ * Extract Data
+ * @param { string|Object } data
+ * @param { string } type
+ * @returns { undefined | string | number | Object | array.Object }
+ */
 function extractData(data, type) {
   if (data) {
     switch (type) {
@@ -83,57 +96,18 @@ function extractData(data, type) {
         return getKeyData(data);
 
       default:
-        console.error("Error while extracting data.");
-        return;
+        throw new Error("Unknown type parameter: " + type);
     }
   } else {
-    console.error("Error while extracting data.");
-    return;
+    throw new Error("Missing data parameter.");
   }
 }
 
-// ===== Performance =====
-function getActivities(userData) {
-  if (userData) {
-    const performanceData = userData.data.map((data) => ({
-      value: data.value,
-      kind: userData.kind[data.kind],
-    }));
-    const performanceArrayReOrder = [
-      { kind: "Intensité", value: performanceData[5].value },
-      { kind: "Vitesse", value: performanceData[4].value },
-      { kind: "Force", value: performanceData[3].value },
-      { kind: "Endurance", value: performanceData[2].value },
-      { kind: "Energie", value: performanceData[1].value },
-      { kind: "Cardio", value: performanceData[0].value },
-    ];
-    return performanceArrayReOrder;
-  }
-  return;
-  // or default
-}
-
-// ===== Average =====
-function getAverageSessions(userData) {
-  if (userData) {
-    return userData;
-  }
-  // or default
-}
-
-// ===== Score =====
-function getTodayScore(userData) {
-  // console.log(userData);
-  if (userData.data.score) {
-    return userData.data.score;
-  }
-  if (userData.data.todayScore) {
-    return userData.data.todayScore;
-  }
-  // or default
-}
-
-// ===== Activity =====
+/**
+ * get Data
+ * @param { array.Object } userData
+ * @returns { array.Object } return a new array with data formated
+ */
 function getDailyActivity(userData) {
   // console.log(userData);
   if (userData) {
@@ -154,12 +128,72 @@ function getDailyActivity(userData) {
   // or default
 }
 
-// ===== Name Surname =====
+/**
+ * get Data
+ * @param { array.Object } userData
+ * @returns { array.Object } userData without modification
+ */
+function getAverageSessions(userData) {
+  if (userData) {
+    return userData;
+  }
+  // or default
+}
+
+/**
+ * get Data
+ * @param { array.Object } userData
+ * @returns { array.Object } data re-order and formated for recharts radar
+ */
+function getActivities(userData) {
+  if (userData) {
+    const performanceData = userData.data.map((data) => ({
+      value: data.value,
+      kind: userData.kind[data.kind],
+    }));
+    const performanceArrayReOrder = [
+      { kind: "Intensité", value: performanceData[5].value },
+      { kind: "Vitesse", value: performanceData[4].value },
+      { kind: "Force", value: performanceData[3].value },
+      { kind: "Endurance", value: performanceData[2].value },
+      { kind: "Energie", value: performanceData[1].value },
+      { kind: "Cardio", value: performanceData[0].value },
+    ];
+    return performanceArrayReOrder;
+  }
+  return;
+  // or default
+}
+
+/**
+ * get Data
+ * @param { Object } userData
+ * @returns { number } score number
+ */
+function getTodayScore(userData) {
+  if (userData.data.score) {
+    return userData.data.score;
+  }
+  if (userData.data.todayScore) {
+    return userData.data.todayScore;
+  }
+  // or default
+}
+
+/**
+ * get Data
+ * @param { Object } userData
+ * @returns { string } user first name
+ */
 function getFirstName(userData) {
   return userData.data.userInfos.firstName;
 }
 
-// ===== Key Data =====
+/**
+ * get Data
+ * @param { Object } userData
+ * @returns { string } user first name
+ */
 function getKeyData(userData) {
   return userData.data.keyData;
 }
