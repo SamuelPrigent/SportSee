@@ -9,8 +9,8 @@ const BASE_URL = "http://localhost:3000";
  * @returns { undefined | Object } - array of data
  */
 export function useSportSeeApi(userId, type) {
-  // const [error, setError] = useState(false);
   // const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [data, setData] = useState({});
   const endpoint = getEndpoint(userId, type);
   useEffect(() => {
@@ -20,10 +20,11 @@ export function useSportSeeApi(userId, type) {
         const url = `${BASE_URL}/${endpoint}`;
         const response = await fetch(url);
         const data = await response.json();
-        // get default data
+        // get default data if error
         if (data === "can not get user") {
           const defaultData = getDefaultData(type);
           setData(defaultData);
+          setError(true);
         }
         // get user data
         else {
@@ -32,7 +33,7 @@ export function useSportSeeApi(userId, type) {
         }
       } catch (err) {
         console.error(`Error on ${endpoint} : ${err}`);
-        // setError(true);
+        setError(true);
       } finally {
         //  setIsLoading(false);
       }
@@ -41,7 +42,7 @@ export function useSportSeeApi(userId, type) {
     fetchData();
   }, []);
 
-  return { data };
+  return { data, error };
 }
 
 /**
@@ -167,7 +168,7 @@ function getDailyActivity(userData) {
 /**
  * @returns { array.Object } default data
  */
-export function getDefaultDailyActivity() {
+function getDefaultDailyActivity() {
   const dailyActivity = [];
   let date = new Date(Date.now());
   // eslint-disable-next-line no-unused-vars
@@ -200,7 +201,7 @@ function getAverageSessions(userData) {
 /**
  * @returns { array.Object } default data
  */
-export function getDefaultAverageSessions() {
+function getDefaultAverageSessions() {
   const averageSessions = [
     {
       day: 1,
@@ -262,7 +263,7 @@ function getActivities(userData) {
 /**
  * @returns { array.Object } default data
  */
-export function getDefaultActivities() {
+function getDefaultActivities() {
   const ACTIVITY_BY_KIND = {
     1: "Intensité",
     2: "Vitesse",
@@ -285,14 +286,11 @@ export function getDefaultActivities() {
 }
 
 /**
- * get Data - default value if "can not get user"
+ * get Data
  * @param { Object } userData
  * @returns { number } score number
  */
 function getTodayScore(userData) {
-  if (userData === "can not get user") {
-    return 0;
-  }
   if (userData.data && userData.data.score) {
     return userData.data.score;
   }
@@ -302,14 +300,12 @@ function getTodayScore(userData) {
 }
 
 /**
- * get Data - default value if "can not get user"
+ * get Data
  * @param { Object } userData
  * @returns { string } user first name
  */
 function getFirstName(userData) {
-  return userData === "can not get user"
-    ? "Unknown user"
-    : userData.data.userInfos.firstName;
+  return userData.data.userInfos.firstName;
 }
 
 /**
@@ -318,15 +314,13 @@ function getFirstName(userData) {
  * @returns { string } user first name
  */
 function getKeyData(userData) {
-  return userData === "can not get user"
-    ? getDefaultKeyData()
-    : userData.data.keyData;
+  return userData.data.keyData;
 }
 
 /**
  * @returns { Object } default data
  */
-export function getDefaultKeyData() {
+function getDefaultKeyData() {
   return {
     calorieCount: 0,
     proteinCount: 0,

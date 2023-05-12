@@ -20,7 +20,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 //
 // use API for refresh title
-// import { useSportSeeApi } from "../services/hooks/fetchApi.js";
+import { useSportSeeApi } from "../services/hooks/fetchApi.js";
 
 //
 function Profile() {
@@ -38,12 +38,18 @@ function Profile() {
     userId = 18;
   }
 
-  // Gérer l'erreur ici pour ne pas a appeler l'API si l'utilisateur ne fonctionne pas ?
-  // ou gérer le code autrement dans fetchAPI pour ne pas avoir 18 erreurs ?
+  // TEST API ? error on hooks call ?
+  // const { error } = useSportSeeApi(userId, "firstName");
+  // console.log("error :", error);
 
-  // TEST WHAT'S HAPPEND IF NO REDIRECTION
-  // navigate;
+  // Methode de gestion d'erreur pour la redirection ?
+  // R si userId ne correspond à aucun utilisateur ? (comment faire)
+  // R si erreur 404 lors d'une requête test du firstName ?
+
+  // ==== REDIRECTION ====
+  // Redirection if bad Calls, if Error ? in API;
   // const navigate = useNavigate();
+  // if (error) {
   // if (userId != 12 && userId != 18) {
   //   useEffect(() => {
   //     navigate("/error");
