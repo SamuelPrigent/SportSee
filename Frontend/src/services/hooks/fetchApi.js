@@ -15,19 +15,26 @@ export function useSportSeeApi(userId, type) {
   const endpoint = getEndpoint(userId, type);
   useEffect(() => {
     if (!endpoint) return;
-    // setIsLoading(true);
     async function fetchData() {
       try {
         const url = `${BASE_URL}/${endpoint}`;
         const response = await fetch(url);
         const data = await response.json();
-        const extractedData = extractData(data, type);
-        setData(extractedData);
+        // get default data
+        if (data === "can not get user") {
+          const defaultData = getDefaultData(type);
+          setData(defaultData);
+        }
+        // get user data
+        else {
+          const userData = getUserData(data, type);
+          setData(userData);
+        }
       } catch (err) {
         console.error(`Error on ${endpoint} : ${err}`);
         // setError(true);
       } finally {
-        // setIsLoading(false);
+        //  setIsLoading(false);
       }
     }
 
@@ -69,12 +76,42 @@ function getEndpoint(userId, type) {
 }
 
 /**
+ * Default data
+ * @param { string } type
+ * @returns { undefined | string | number | Object | array.Object }
+ */
+function getDefaultData(type) {
+  switch (type) {
+    case "activity":
+      return getDefaultDailyActivity();
+
+    case "average-sessions":
+      return getDefaultAverageSessions();
+
+    case "performance":
+      return getDefaultActivities();
+
+    case "today-score":
+      return 0;
+
+    case "firstName":
+      return "...";
+
+    case "key-data":
+      return getDefaultKeyData();
+
+    default:
+      return;
+  }
+}
+
+/**
  * Extract Data
  * @param { string|Object } data
  * @param { string } type
  * @returns { undefined | string | number | Object | array.Object }
  */
-function extractData(data, type) {
+function getUserData(data, type) {
   if (data) {
     switch (type) {
       case "activity":
@@ -109,10 +146,8 @@ function extractData(data, type) {
  * @returns { array.Object } return a new array with data formated
  */
 function getDailyActivity(userData) {
-  // console.log(userData);
   if (userData) {
     const dailyActivity = [];
-
     for (let item of userData) {
       // eslint-disable-next-line no-unused-vars
       const [yyyy, mm, dd] = item.day.split("-");
@@ -126,6 +161,27 @@ function getDailyActivity(userData) {
     return dailyActivity;
   }
   // or default
+  return getDefaultDailyActivity();
+}
+
+/**
+ * @returns { array.Object } default data
+ */
+export function getDefaultDailyActivity() {
+  const dailyActivity = [];
+  let date = new Date(Date.now());
+  // eslint-disable-next-line no-unused-vars
+  for (let _ of "1234567") {
+    let dateFr = new Intl.DateTimeFormat("fr").format(date);
+    dailyActivity.push({
+      day: dateFr.slice(0, 5),
+      kilogram: 0,
+      calories: 0,
+    });
+    date.setDate(date.getDate() - 1);
+  }
+  dailyActivity.reverse();
+  return dailyActivity;
 }
 
 /**
@@ -138,6 +194,44 @@ function getAverageSessions(userData) {
     return userData;
   }
   // or default
+  return getDefaultAverageSessions();
+}
+
+/**
+ * @returns { array.Object } default data
+ */
+export function getDefaultAverageSessions() {
+  const averageSessions = [
+    {
+      day: 1,
+      sessionLength: 0,
+    },
+    {
+      day: 2,
+      sessionLength: 0,
+    },
+    {
+      day: 3,
+      sessionLength: 0,
+    },
+    {
+      day: 4,
+      sessionLength: 0,
+    },
+    {
+      day: 5,
+      sessionLength: 0,
+    },
+    {
+      day: 6,
+      sessionLength: 0,
+    },
+    {
+      day: 7,
+      sessionLength: 0,
+    },
+  ];
+  return averageSessions;
 }
 
 /**
@@ -161,32 +255,61 @@ function getActivities(userData) {
     ];
     return performanceArrayReOrder;
   }
-  return;
   // or default
+  return getDefaultActivities();
 }
 
 /**
- * get Data
+ * @returns { array.Object } default data
+ */
+export function getDefaultActivities() {
+  const ACTIVITY_BY_KIND = {
+    1: "Intensité",
+    2: "Vitesse",
+    3: "Force",
+    4: "Endurance",
+    5: "Energie",
+    6: "Cardio",
+  };
+
+  const activities = [];
+
+  for (let key in ACTIVITY_BY_KIND) {
+    activities.push({
+      kind: ACTIVITY_BY_KIND[key],
+      value: 0,
+    });
+  }
+
+  return activities;
+}
+
+/**
+ * get Data - default value if "can not get user"
  * @param { Object } userData
  * @returns { number } score number
  */
 function getTodayScore(userData) {
-  if (userData.data.score) {
+  if (userData === "can not get user") {
+    return 0;
+  }
+  if (userData.data && userData.data.score) {
     return userData.data.score;
   }
-  if (userData.data.todayScore) {
+  if (userData.data && userData.data.todayScore) {
     return userData.data.todayScore;
   }
-  // or default
 }
 
 /**
- * get Data
+ * get Data - default value if "can not get user"
  * @param { Object } userData
  * @returns { string } user first name
  */
 function getFirstName(userData) {
-  return userData.data.userInfos.firstName;
+  return userData === "can not get user"
+    ? "Unknown user"
+    : userData.data.userInfos.firstName;
 }
 
 /**
@@ -195,5 +318,19 @@ function getFirstName(userData) {
  * @returns { string } user first name
  */
 function getKeyData(userData) {
-  return userData.data.keyData;
+  return userData === "can not get user"
+    ? getDefaultKeyData()
+    : userData.data.keyData;
+}
+
+/**
+ * @returns { Object } default data
+ */
+export function getDefaultKeyData() {
+  return {
+    calorieCount: 0,
+    proteinCount: 0,
+    carbohydrateCount: 0,
+    lipidCount: 0,
+  };
 }

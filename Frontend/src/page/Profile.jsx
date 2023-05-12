@@ -38,79 +38,83 @@ function Profile() {
     userId = 18;
   }
 
+  // Gérer l'erreur ici pour ne pas a appeler l'API si l'utilisateur ne fonctionne pas ?
+  // ou gérer le code autrement dans fetchAPI pour ne pas avoir 18 erreurs ?
+
+  // TEST WHAT'S HAPPEND IF NO REDIRECTION
   // navigate;
-  const navigate = useNavigate();
-  if (userId != 12 && userId != 18) {
-    useEffect(() => {
-      navigate("/error");
-    }, [userId, navigate]);
-  } else
-    return (
-      <div className="mainContainer">
-        <LeftMenu />
-        <div className="rightContainer">
-          <div className="profileName">
-            <div>Bonjour</div>
-            <ProfileName userId={userId} />
-          </div>
-          <div className="profileMessage">
-            Félicitation ! Vous avez explosé vos objectifs hier 👏
-          </div>
-          <div className="gridContainer">
-            <div className="gridContainerLeft">
-              <div className="activityGraph">
-                <Activity userId={userId} />
+  // const navigate = useNavigate();
+  // if (userId != 12 && userId != 18) {
+  //   useEffect(() => {
+  //     navigate("/error");
+  //   }, [userId, navigate]);
+  // } else
+  return (
+    <div className="mainContainer">
+      <LeftMenu />
+      <div className="rightContainer">
+        <div className="profileName">
+          <div>Bonjour</div>
+          <ProfileName userId={userId} />
+        </div>
+        <div className="profileMessage">
+          Félicitation ! Vous avez explosé vos objectifs hier 👏
+        </div>
+        <div className="gridContainer">
+          <div className="gridContainerLeft">
+            <div className="activityGraph">
+              <Activity userId={userId} />
+            </div>
+            <div className="bottomGraphs">
+              <div className="bottomGraph">
+                <Average userId={userId} />
               </div>
-              <div className="bottomGraphs">
-                <div className="bottomGraph">
-                  <Average userId={userId} />
-                </div>
-                <div className="bottomGraph">
-                  <Performance userId={userId} />
-                </div>
-                <div className="bottomGraph">
-                  <Score userId={userId} />
-                </div>
+              <div className="bottomGraph">
+                <Performance userId={userId} />
+              </div>
+              <div className="bottomGraph">
+                <Score userId={userId} />
               </div>
             </div>
-            <div className="gridContainerRight">
-              <CardOfKcal
-                // data
-                userId={userId}
-                type="kcal"
-                // color
-                icon={kcal}
-                ClassColor="TotalColor"
-              />
-              <CardOfKcal
-                // data
-                userId={userId}
-                type="prot"
-                // color
-                icon={meat}
-                ClassColor="ProtColor"
-              />
-              <CardOfKcal
-                // data
-                userId={userId}
-                type={"carb"}
-                // color
-                icon={apple}
-                ClassColor="CarbColor"
-              />
-              <CardOfKcal
-                // data
-                userId={userId}
-                type={"lipid"}
-                // color
-                icon={cheeseburger}
-                ClassColor="FatColor"
-              />
-            </div>
+          </div>
+          <div className="gridContainerRight">
+            <CardOfKcal
+              // data
+              userId={userId}
+              type="kcal"
+              // color
+              icon={kcal}
+              ClassColor="TotalColor"
+            />
+            <CardOfKcal
+              // data
+              userId={userId}
+              type="prot"
+              // color
+              icon={meat}
+              ClassColor="ProtColor"
+            />
+            <CardOfKcal
+              // data
+              userId={userId}
+              type={"carb"}
+              // color
+              icon={apple}
+              ClassColor="CarbColor"
+            />
+            <CardOfKcal
+              // data
+              userId={userId}
+              type={"lipid"}
+              // color
+              icon={cheeseburger}
+              ClassColor="FatColor"
+            />
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
 }
 
 export default Profile;

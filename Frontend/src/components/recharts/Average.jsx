@@ -17,7 +17,6 @@ import PropTypes from "prop-types";
 //
 function Recharts({ userId }) {
   const { data } = useSportSeeApi(userId, "average-sessions");
-  // console.log(data);
 
   return (
     <div className="containerCharts">

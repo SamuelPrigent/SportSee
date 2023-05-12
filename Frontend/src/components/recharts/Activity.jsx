@@ -25,51 +25,6 @@ import PropTypes from "prop-types";
 //
 function Recharts({ userId }) {
   const { data } = useSportSeeApi(userId, "activity");
-  // console.log(data);
-
-  // mock
-  // const activity = [
-  //   {
-  //     day: "1",
-  //     kilogram: 71,
-  //     calories: 240,
-  //   },
-  //   {
-  //     day: "2",
-  //     kilogram: 72,
-  //     calories: 270,
-  //   },
-  //   {
-  //     day: "3",
-  //     kilogram: 71,
-  //     calories: 260,
-  //   },
-  //   {
-  //     day: "4",
-  //     kilogram: 72,
-  //     calories: 390,
-  //   },
-  //   {
-  //     day: "5",
-  //     kilogram: 71,
-  //     calories: 160,
-  //   },
-  //   {
-  //     day: "6",
-  //     kilogram: 70,
-  //     calories: 162,
-  //   },
-  //   {
-  //     day: "7",
-  //     kilogram: 69,
-  //     calories: 160,
-  //   },
-  //   {
-  //     day: "8",
-  //     kilogram: 69,
-  //     calories: 210,
-  //   },
-  // ];
 
   return (
     <div className="containerCharts">
