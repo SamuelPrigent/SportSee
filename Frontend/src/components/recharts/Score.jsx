@@ -7,20 +7,12 @@ import { Cell, Pie, PieChart } from "recharts";
 // API
 import { useSportSeeApi } from "../../services/hooks/fetchApi.js";
 // Prop Types
-// import PropTypes from "prop-types";
-
-// ??
-// import mockedData from "../mock/mockedData.js"; // mock
+import PropTypes from "prop-types";
 
 //
 function Score({ userId }) {
   const { data } = useSportSeeApi(userId, "today-score");
-
   let score = data;
-
-  // if (error || isLoading) {
-  //   score = 0;
-  // }
 
   const pieData = [
     { name: "completed", value: score, fillColor: "#ff0101" },
@@ -80,3 +72,7 @@ function Score({ userId }) {
 }
 
 export default Score;
+
+Score.propTypes = {
+  userId: PropTypes.number.isRequired,
+};

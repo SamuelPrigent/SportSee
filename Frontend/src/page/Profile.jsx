@@ -18,8 +18,6 @@ import { useParams } from "react-router-dom"; // get id
 // for redirection
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-//
-// use API for refresh title
 import { useSportSeeApi } from "../services/hooks/fetchApi.js";
 
 //

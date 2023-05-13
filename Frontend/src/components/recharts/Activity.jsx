@@ -19,9 +19,6 @@ import { useSportSeeApi } from "../../services/hooks/fetchApi.js";
 // PropTypes
 import PropTypes from "prop-types";
 
-// ??
-// import mockedData from "../mock/mockedData.js"; // mock
-
 //
 function Recharts({ userId }) {
   const { data } = useSportSeeApi(userId, "activity");
@@ -128,4 +125,8 @@ function ActivityTooltip({ active, payload }) {
 ActivityTooltip.propTypes = {
   active: PropTypes.bool,
   payload: PropTypes.array,
+};
+
+Recharts.propTypes = {
+  userId: PropTypes.number.isRequired,
 };

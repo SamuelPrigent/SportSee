@@ -1,5 +1,7 @@
 // style
 import "../style/cardofkcal.css";
+// Prop Types
+import PropTypes from "prop-types";
 // API
 import { useSportSeeApi } from "../services/hooks/fetchApi.js";
 
@@ -46,3 +48,10 @@ function CardOfKcal({ type, userId, icon, ClassColor }) {
 }
 
 export default CardOfKcal;
+
+CardOfKcal.propTypes = {
+  userId: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
+  ClassColor: PropTypes.string.isRequired,
+  // icon: PropTypes.string.isRequired,
+};

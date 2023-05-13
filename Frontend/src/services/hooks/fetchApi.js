@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 const BASE_URL = "http://localhost:3000";
 
 /**
@@ -20,7 +19,7 @@ export function useSportSeeApi(userId, type) {
         const url = `${BASE_URL}/${endpoint}`;
         const response = await fetch(url);
         const data = await response.json();
-        // get default data if error
+        // get default data if "can not get user"
         if (data === "can not get user") {
           const defaultData = getDefaultData(type);
           setData(defaultData);
@@ -32,15 +31,18 @@ export function useSportSeeApi(userId, type) {
           setData(userData);
         }
       } catch (err) {
-        console.error(`Error on ${endpoint} : ${err}`);
+        // get default data if any error
+        const defaultData = getDefaultData(type);
+        setData(defaultData);
         setError(true);
+        console.error(`Error on ${endpoint} : ${err}`);
       } finally {
         //  setIsLoading(false);
       }
     }
 
     fetchData();
-  }, []);
+  }, [userId, type, endpoint]);
 
   return { data, error };
 }
@@ -150,7 +152,6 @@ function getDailyActivity(userData) {
   if (userData) {
     const dailyActivity = [];
     for (let item of userData) {
-      // eslint-disable-next-line no-unused-vars
       const [yyyy, mm, dd] = item.day.split("-");
       // push item data
       dailyActivity.push({
@@ -171,7 +172,6 @@ function getDailyActivity(userData) {
 function getDefaultDailyActivity() {
   const dailyActivity = [];
   let date = new Date(Date.now());
-  // eslint-disable-next-line no-unused-vars
   for (let _ of "1234567") {
     let dateFr = new Intl.DateTimeFormat("fr").format(date);
     dailyActivity.push({
@@ -297,6 +297,8 @@ function getTodayScore(userData) {
   if (userData.data && userData.data.todayScore) {
     return userData.data.todayScore;
   }
+  // or default
+  return 0;
 }
 
 /**
@@ -305,7 +307,11 @@ function getTodayScore(userData) {
  * @returns { string } user first name
  */
 function getFirstName(userData) {
-  return userData.data.userInfos.firstName;
+  if (userData) {
+    return userData.data.userInfos.firstName;
+  }
+  // or default
+  return "...";
 }
 
 /**
@@ -314,7 +320,11 @@ function getFirstName(userData) {
  * @returns { string } user first name
  */
 function getKeyData(userData) {
-  return userData.data.keyData;
+  if (userData) {
+    return userData.data.keyData;
+  }
+  // or default
+  return getDefaultKeyData();
 }
 
 /**

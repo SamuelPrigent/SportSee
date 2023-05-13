@@ -9,10 +9,7 @@ import { PolarAngleAxis, PolarGrid, Radar, RadarChart } from "recharts";
 // API
 import { useSportSeeApi } from "../../services/hooks/fetchApi.js";
 // Prop Types
-// import PropTypes from "prop-types";
-
-// ??
-// import mockedData from "../mock/mockedData.js"; // mock
+import PropTypes from "prop-types";
 
 //
 function Performance({ userId }) {
@@ -56,6 +53,6 @@ function Performance({ userId }) {
 
 export default Performance;
 
-// Recharts.propTypes = {
-//   userId: PropTypes.string.isRequired,
-// };
+Performance.propTypes = {
+  userId: PropTypes.number.isRequired,
+};

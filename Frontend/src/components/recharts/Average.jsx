@@ -11,9 +11,6 @@ import { useSportSeeApi } from "../../services/hooks/fetchApi.js";
 // Prop Types
 import PropTypes from "prop-types";
 
-// ??
-// import mockedData from "../mock/mockedData.js"; // mock
-
 //
 function Recharts({ userId }) {
   const { data } = useSportSeeApi(userId, "average-sessions");
