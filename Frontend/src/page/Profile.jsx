@@ -22,9 +22,9 @@ import { useSportSeeApi } from "../services/hooks/fetchApi.js";
 
 //
 function Profile() {
-  let userId = useParams().id;
+  let userId = parseInt(useParams().id, 10);
   // if undefined use user/12
-  if (!userId) {
+  if (isNaN(userId)) {
     userId = 12;
   }
 
