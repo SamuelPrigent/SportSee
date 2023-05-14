@@ -24,35 +24,29 @@ import { useSportSeeApi } from "../services/hooks/fetchApi.js";
 function Profile() {
   let userId = parseInt(useParams().id, 10);
   // if undefined use user/12
-  if (isNaN(userId)) {
-    userId = 12;
-  }
+  // if (!userId) {
+  //   userId = 12;
+  // }
 
   // Short-cut for userId
-  if (useParams().id == 1) {
+  if (userId === 1) {
     userId = 12;
   }
-  if (useParams().id == 2) {
+  if (userId === 2) {
     userId = 18;
   }
 
   // TEST API ? error on hooks call ?
-  // const { error } = useSportSeeApi(userId, "firstName");
-  // console.log("error :", error);
+  const { error } = useSportSeeApi(userId, "firstName");
 
-  // Methode de gestion d'erreur pour la redirection ?
-  // R si userId ne correspond à aucun utilisateur ? (comment faire)
-  // R si erreur 404 lors d'une requête test du firstName ?
+  // Redirection if error
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (error) {
+      navigate("/error");
+    }
+  }, [userId, navigate, error]);
 
-  // ==== REDIRECTION ====
-  // Redirection if bad Calls, if Error ? in API;
-  // const navigate = useNavigate();
-  // if (error) {
-  // if (userId != 12 && userId != 18) {
-  //   useEffect(() => {
-  //     navigate("/error");
-  //   }, [userId, navigate]);
-  // } else
   return (
     <div className="mainContainer">
       <LeftMenu />
