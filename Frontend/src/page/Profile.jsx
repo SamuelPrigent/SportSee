@@ -23,10 +23,6 @@ import { useSportSeeApi } from "../services/hooks/fetchApi.js";
 //
 function Profile() {
   let userId = parseInt(useParams().id, 10);
-  // if undefined use user/12
-  // if (!userId) {
-  //   userId = 12;
-  // }
 
   // Short-cut for userId
   if (userId === 1) {
@@ -36,10 +32,8 @@ function Profile() {
     userId = 18;
   }
 
-  // TEST API ? error on hooks call ?
-  const { error } = useSportSeeApi(userId, "firstName");
-
   // Redirection if error
+  const { error } = useSportSeeApi(userId, "firstName");
   const navigate = useNavigate();
   useEffect(() => {
     if (error) {

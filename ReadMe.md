@@ -5,11 +5,6 @@ You have to run Backend and Frontend, to do it follow instructions in :
 - `Backend > Readme.md`
 - `Frontend > Readme.md`
 
-## Install Router
-
-For the router its `npm install react-router-dom@6`
-(not npm install react-router)
-
 ## Endpoints
 
 This project includes four endpoints that you will be able to use:
