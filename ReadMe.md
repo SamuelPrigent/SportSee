@@ -16,11 +16,11 @@ This project includes four endpoints that you will be able to use:
 
 ### userId
 
-- **Warning, currently only two users have been mocked. They have userId 12 and 18 respectively.**
+- Only two users have been mocked. They have userId 12 and 18 respectively.
 
-- **But u can use 1 and 2 shortcuts when you are on the website.**
+- `http://localhost:5173/user/1` - u can use 1 or 2 shortcuts in URL when you are on the website.
 
 ### Examples of queries
 
-- `http://localhost:3000/user/12/performance` - Retrieves the performance of the user with id 12
 - `http://localhost:3000/user/18` - Retrieves user 18's main information.
+- `http://localhost:3000/user/12/performance` - Retrieves the performance of the user with id 12
