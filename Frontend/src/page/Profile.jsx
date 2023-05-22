@@ -32,14 +32,14 @@ function Profile() {
     userId = 18;
   }
 
-  // Redirection if error
-  const { error } = useSportSeeApi(userId, "firstName");
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (error) {
-      navigate("/error");
-    }
-  }, [userId, navigate, error]);
+  // (IF we want Redirection on /error WHEN error occur)
+  // const { error } = useSportSeeApi(userId, "firstName");
+  // const navigate = useNavigate();
+  // useEffect(() => {
+  //   if (error) {
+  //     navigate("/error");
+  //   }
+  // }, [userId, navigate, error]);
 
   return (
     <div className="mainContainer">

@@ -53,5 +53,4 @@ CardOfKcal.propTypes = {
   userId: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
   ClassColor: PropTypes.string.isRequired,
-  // icon: PropTypes.string.isRequired,
 };

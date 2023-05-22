@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 const BASE_URL = "http://localhost:3000";
+// models and class for data
+import { KeyData } from "../../models/KeyData.js";
+import { PerformanceData } from "../../models/PerformanceData.js";
 
 /**
  * Hook to get data from API in react components
@@ -242,19 +245,7 @@ function getDefaultAverageSessions() {
  */
 function getActivities(userData) {
   if (userData) {
-    const performanceData = userData.data.map((data) => ({
-      value: data.value,
-      kind: userData.kind[data.kind],
-    }));
-    const performanceArrayReOrder = [
-      { kind: "Intensité", value: performanceData[5].value },
-      { kind: "Vitesse", value: performanceData[4].value },
-      { kind: "Force", value: performanceData[3].value },
-      { kind: "Endurance", value: performanceData[2].value },
-      { kind: "Energie", value: performanceData[1].value },
-      { kind: "Cardio", value: performanceData[0].value },
-    ];
-    return performanceArrayReOrder;
+    return new PerformanceData(userData).formated();
   }
   // or default
   return getDefaultActivities();
@@ -264,25 +255,7 @@ function getActivities(userData) {
  * @returns { array.Object } default data
  */
 function getDefaultActivities() {
-  const ACTIVITY_BY_KIND = {
-    1: "Intensité",
-    2: "Vitesse",
-    3: "Force",
-    4: "Endurance",
-    5: "Energie",
-    6: "Cardio",
-  };
-
-  const activities = [];
-
-  for (let key in ACTIVITY_BY_KIND) {
-    activities.push({
-      kind: ACTIVITY_BY_KIND[key],
-      value: 0,
-    });
-  }
-
-  return activities;
+  return new PerformanceData().data;
 }
 
 /**
@@ -321,7 +294,7 @@ function getFirstName(userData) {
  */
 function getKeyData(userData) {
   if (userData) {
-    return userData.data.keyData;
+    return new KeyData(userData.data.keyData);
   }
   // or default
   return getDefaultKeyData();
@@ -331,10 +304,5 @@ function getKeyData(userData) {
  * @returns { Object } default data
  */
 function getDefaultKeyData() {
-  return {
-    calorieCount: 0,
-    proteinCount: 0,
-    carbohydrateCount: 0,
-    lipidCount: 0,
-  };
+  return new KeyData();
 }
